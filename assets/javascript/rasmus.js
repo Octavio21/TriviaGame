@@ -27,15 +27,15 @@ var quizOver = false;
 
 $(document).ready(function () {
 
-    // Display the first question
+    
     displayCurrentQuestion();
     $(".quizMessage").html('Good Luck!');
 
-    // On clicking next, display the next question
+    
     $(this).find("#nextButton").on("click", function () {
         if (!quizOver) {
             nextQuestion();
-        } else { // quiz is over and clicked the next button (which now displays 'Play Again?'
+        } else { 
             quizOver = false;
             $("#nextButton").html("Play Again?");
             resetQuiz();
@@ -55,7 +55,7 @@ function startTimer() {
     }, 30000);
 }
 
-// This displays the current question AND the choices
+
 function displayCurrentQuestion() {
     clearTimeout(timer);
     startTimer();
@@ -65,11 +65,11 @@ function displayCurrentQuestion() {
     var questionClass = $(document).find(".quizContainer > .question");
     var choiceList = $(document).find(".quizContainer > .choiceList");
     var numChoices = questions[currentQuestion].choices.length;
-    // Set the questionClass text to the current question
+    
     $(questionClass).html(question);
     $(".quizMessage").html("Please select an answer");
     $("#nextButton").html("Next Question");
-    // Remove all current <li> elements (if any)
+    
     $(choiceList).find("li").remove();
 
     var choice;
@@ -84,23 +84,21 @@ function nextQuestion() {
 
     if (value == undefined) {
         $(".quizMessage").html("Please select an answer");
-        // $(document).find(".quizMessage").show();
+        
     } else {
-        // TODO: Remove any message -> not sure if this is efficient to call this each time....
+        
         $(".quizMessage").html('');
 
         if (value == questions[currentQuestion].correctAnswer) {
             correctAnswers++;
         }
 
-        currentQuestion++; // Since we have already displayed the first question on DOM ready
+        currentQuestion++; 
         if (currentQuestion < questions.length) {
             displayCurrentQuestion();
         } else {
             displayScore();
-            //                    $(document).find(".nextButton").toggle();
-            //                    $(document).find(".playAgainButton").toggle();
-            // Change the text in the next button to ask if user wants to play again
+            
             $("#nextButton").html("Play Again?");
             quizOver = true;
         }
@@ -118,7 +116,7 @@ function displayScore() {
     $(".question").html('');
     $(".choiceList").html('');
     $("#nextButton").html('Play Again');
-    // $(document).find(".quizContainer > .result").show();
+    
 }
 
 function hideScore() {
